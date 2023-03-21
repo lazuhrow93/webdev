@@ -15,6 +15,8 @@ namespace FutureValue.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Name = "Mary";
+            ViewBag.FV = 99999.99;
             return View();
         }
 
