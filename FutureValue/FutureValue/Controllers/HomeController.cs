@@ -1,6 +1,5 @@
 ﻿using FutureValue.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace FutureValue.Controllers
 {
@@ -13,11 +12,18 @@ namespace FutureValue.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.Name = "Mary";
-            ViewBag.FV = 99999.99;
+            ViewBag.FV = 0;
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(FutureValueModel model)
+        {
+            ViewBag.FV = model.CalculateFutureValue();
+            return View(model);
         }
 
         public IActionResult Privacy()
@@ -25,10 +31,10 @@ namespace FutureValue.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //    public IActionResult Error()
+        //    {
+        //        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //    }
     }
 }
